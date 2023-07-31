@@ -1,11 +1,27 @@
 import React from "react";
+import Header from "../src/components/Header";
+import CheckTool from "../src/components/CheckTool";
+import KnowledgeCard from "../src/components/KnowledgeCard";
 
 const Index = () => {
   return (
-    <div>
-      <h1>Monash IE Onboarding</h1>
-      <p>This is a new page in your Next.js app.</p>
-    </div>
+    <>
+      <div>
+        <Header />
+        <div className="h-[calc(100vh_-_80px)]">
+          <div className="flex items-center justify-center gap-x-[86px] h-full">
+            <KnowledgeCard
+              title="Sustainability "
+              description="What is included in sustainability?"
+            />
+            <KnowledgeCard
+              title="Carbon Footprint "
+              description="What is Carbon Footprint?"
+            />
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 
