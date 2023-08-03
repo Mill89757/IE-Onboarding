@@ -1,8 +1,9 @@
 import CheckTool from "./CheckTool";
 import { useState } from "react";
+import Link from "next/link";
 
-export default function Header() {
-  const [index, setIndex] = useState(0);
+export default function Header(props) {
+  const index = props.index;
 
   return (
     <>
@@ -13,30 +14,30 @@ export default function Header() {
           </h1>
         </div>
 
-        <div
+        <Link
           className={`flex w-[180px] items-center justify-center h-full cursor-pointer ${
             index === 0 ? "bg-[#A3C09F]" : "hover:bg-[#A3C09F]"
           }`}
-          onClick={console.log("Hi, I am home button")}
+          href="/"
         >
           <h1 className="text-[#185E0E] font-bold text-2xl">Home</h1>
-        </div>
-        <div
+        </Link>
+        <Link
           className={`flex w-[180px] items-center justify-center h-full cursor-pointer ${
             index === 1 ? "bg-[#A3C09F]" : "hover:bg-[#A3C09F]"
           }`}
-          onClick={console.log("Hi, I am current button")}
+          href={"/current"}
         >
           <h1 className="text-[#185E0E] font-bold text-2xl">Current</h1>
-        </div>
-        <div
+        </Link>
+        <Link
           className={`flex w-[180px] items-center justify-center h-full cursor-pointer ${
             index === 2 ? "bg-[#A3C09F]" : "hover:bg-[#A3C09F]"
           }`}
-          onClick={console.log("Hi, I am MyStats button")}
+          href={"/stats"}
         >
           <h1 className="text-[#185E0E] font-bold text-2xl">MyStats</h1>
-        </div>
+        </Link>
       </div>
     </>
   );

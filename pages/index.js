@@ -7,7 +7,7 @@ const Index = () => {
   return (
     <>
       <div>
-        <Header />
+        <Header index={0} />
         <div className="h-[calc(100vh_-_80px)]">
           <div className="flex items-center justify-center gap-x-[86px] h-full">
             <KnowledgeCard
