@@ -2,6 +2,7 @@ import Header from "../src/components/Header";
 import CheckTool from "../src/components/CheckTool";
 import { useState } from "react";
 import FlashMessage from "../src/components/FlashMessage";
+import Link from "next/link";
 
 const static_result = [
   "Congratulations! you have a minimal impact on the environment in terms of carbon dioxide emissions.",
@@ -60,11 +61,14 @@ export default function Stats() {
 
             {/* action button */}
             <div className="w-full flex mt-[42px]">
-              <div className="w-[290px] h-[72px] mr-auto flex items-center justify-center rounded-[25px] bg-[#C7DCC4]">
+              <Link
+                className="w-[290px] h-[72px] mr-auto flex items-center justify-center rounded-[25px] bg-[#C7DCC4]"
+                href="/compare"
+              >
                 <h1 className="text-[#185E0E] text-xl font-semibold">
                   Compare
                 </h1>
-              </div>
+              </Link>
               <div
                 className="w-[290px] h-[72px] flex items-center justify-center rounded-[25px] bg-[#C7DCC4]"
                 onClick={() => {
