@@ -16,7 +16,7 @@ export default function Header(props) {
 
         <Link
           className={`flex w-[180px] items-center justify-center h-full cursor-pointer ${
-            index === 0 ? "bg-[#A3C09F]" : "hover:bg-[#A3C09F]"
+            index === 0 ? "bg-[#A3C09F]" : "hover:bg-[#B9D9B5]"
           }`}
           href="/"
         >
@@ -24,7 +24,7 @@ export default function Header(props) {
         </Link>
         <Link
           className={`flex w-[180px] items-center justify-center h-full cursor-pointer ${
-            index === 1 ? "bg-[#A3C09F]" : "hover:bg-[#A3C09F]"
+            index === 1 ? "bg-[#A3C09F]" : "hover:bg-[#B9D9B5]"
           }`}
           href={"/current"}
         >
@@ -32,7 +32,7 @@ export default function Header(props) {
         </Link>
         <Link
           className={`flex w-[180px] items-center justify-center h-full cursor-pointer ${
-            index === 2 ? "bg-[#A3C09F]" : "hover:bg-[#A3C09F]"
+            index === 2 ? "bg-[#A3C09F]" : "hover:bg-[#B9D9B5]"
           }`}
           href={"/stats"}
         >

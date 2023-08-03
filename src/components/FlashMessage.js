@@ -9,7 +9,7 @@ export default function FlashMessage(props) {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsShowFlashMessage(false);
-    }, 3000);
+    }, 1500);
 
     return () => clearTimeout(timer);
   });
