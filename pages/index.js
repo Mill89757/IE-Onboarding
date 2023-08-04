@@ -13,12 +13,12 @@ const Index = () => {
             <EntranceCard
               title="Sustainability "
               description="What is included in sustainability?"
-              link="/"
+              link="/susinfo"
             />
             <EntranceCard
               title="Carbon Footprint "
               description="What is Carbond Footprint?"
-              link="/"
+              link="/carboninfo"
             />
           </div>
         </div>
