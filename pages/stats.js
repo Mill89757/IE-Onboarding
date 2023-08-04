@@ -89,7 +89,7 @@ export default function Stats() {
                 </h1>
               </div>
               <div className="flex h-[40px]">
-                <h1 className="text-2xl text-[#185E0E]">Electricity Bill</h1>
+                <h1 className="text-2xl text-[#185E0E]">Electricity Usage</h1>
                 <input
                   className="ml-auto h-[40px] bg-[#D1E1CE] p-[6px] rounded-[4px]"
                   onChange={(e) => {
@@ -98,7 +98,7 @@ export default function Stats() {
                 />
               </div>
               <div className="flex h-[40px]">
-                <h1 className="text-2xl text-[#185E0E]">Gas Bill</h1>
+                <h1 className="text-2xl text-[#185E0E]">Gas Usage</h1>
                 <input
                   className="ml-auto h-[40px] bg-[#D1E1CE] p-[6px] rounded-[4px]"
                   onChange={(e) => {
