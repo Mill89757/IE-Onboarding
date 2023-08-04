@@ -1,7 +1,23 @@
+import { useEffect, useRef } from "react";
+import Chart from "chart.js/auto";
 import Header from "../src/components/Header";
 
+function findClosestIndex(numbers, target) {
+  let closestIndex = 0;
+  let closestDifference = Math.abs(target - numbers[0]);
+
+  for (let i = 1; i < numbers.length; i++) {
+    const currentDifference = Math.abs(target - numbers[i]);
+    if (currentDifference < closestDifference) {
+      closestIndex = i;
+      closestDifference = currentDifference;
+    }
+  }
+
+  return closestIndex;
+}
+
 export default function Compare(props) {
-  // const user_value = props.user_value;
   const user_value = 4500;
 
   const dummy_data = [
@@ -9,9 +25,47 @@ export default function Compare(props) {
     3558.33, 3499.33, 3442.17, 3223.67, 3039.67, 2975.83,
   ];
 
-  const config = {
+  const dummy_label = [
+    "3980",
+    "3156",
+    "3804",
+    "3807",
+    "3912",
+    "3806",
+    "3802",
+    "3805",
+    "3975",
+    "3977",
+    "3803",
+    "3177",
+    "3978",
+  ];
+
+  // Find the index of the user value in the dataset
+  const userIndex = findClosestIndex(dummy_data, user_value);
+
+  // Create an array to store background colors for each data point
+  const backgroundColors = dummy_data.map((value, index) =>
+    index === userIndex ? "rgba(255, 0, 0, 0.7)" : "rgba(24, 94, 14, 0.5)"
+  );
+
+  // Configuration for the bar chart
+  const chartConfig = {
     type: "bar",
-    data: data,
+    data: {
+      labels: dummy_label,
+      datasets: [
+        {
+          label: "Carbon Footprint (kgCO2e)",
+          data: dummy_data,
+          borderColor: "#185E0E",
+          backgroundColor: backgroundColors,
+          borderWidth: 2,
+          borderRadius: 5,
+          borderSkipped: false,
+        },
+      ],
+    },
     options: {
       responsive: true,
       plugins: {
@@ -20,40 +74,42 @@ export default function Compare(props) {
         },
         title: {
           display: true,
-          text: "Chart.js Bar Chart",
+          text: "Carbon Footprint Distribution from Victoria, Australia",
         },
       },
     },
   };
 
-  const DATA_COUNT = 7;
-  const NUMBER_CFG = { count: DATA_COUNT, min: -100, max: 100 };
+  // Ref to store the chart instance
+  const chartRef = useRef(null);
 
-  const labels = Utils.months({ count: 7 });
-  const data = {
-    labels: labels,
-    datasets: [
-      {
-        label: "Small Radius",
-        data: Utils.numbers(NUMBER_CFG),
-        borderColor: Utils.CHART_COLORS.blue,
-        backgroundColor: Utils.transparentize(Utils.CHART_COLORS.blue, 0.5),
-        borderWidth: 2,
-        borderRadius: 5,
-        borderSkipped: false,
-      },
-    ],
-  };
+  useEffect(() => {
+    // Create the chart after the component mounts
+    if (chartRef.current) {
+      const ctx = chartRef.current.getContext("2d");
+      chartRef.current.chart = new Chart(ctx, chartConfig);
+    }
+
+    // Clean up chart instance when component unmounts
+    return () => {
+      if (chartRef.current) {
+        chartRef.current.chart.destroy();
+      }
+    };
+  }, []);
 
   return (
     <div>
       <Header index={2} />
       <div className="w-full h-[calc(100vh_-_80px)] flex items-center justify-center">
         <div className="w-[801px] h-[572px]">
-          <h1 className="text-[#185E0E] text-4xl font-medium italic w-full">
+          <h1 className="text-[#185E0E] text-2xl font-medium italic w-full text-center">
             Where are you comparing with other’s carbon footprint?
           </h1>
-          <div className="w-full h-[512px] flex items-center justify-center"></div>
+          <div className="w-full h-[512px] flex items-center justify-center">
+            {/* Add the canvas element to render the chart */}
+            <canvas ref={chartRef} />
+          </div>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../src/components/Header";
 import CheckTool from "../src/components/CheckTool";
-import KnowledgeCard from "../src/components/KnowledgeCard";
+import EntranceCard from "../src/components/EntranceCard";
 
 const Index = () => {
   return (
@@ -10,13 +10,15 @@ const Index = () => {
         <Header index={0} />
         <div className="h-[calc(100vh_-_80px)]">
           <div className="flex items-center justify-center gap-x-[86px] h-full">
-            <KnowledgeCard
+            <EntranceCard
               title="Sustainability "
               description="What is included in sustainability?"
+              link="/"
             />
-            <KnowledgeCard
+            <EntranceCard
               title="Carbon Footprint "
-              description="What is Carbon Footprint?"
+              description="What is Carbond Footprint?"
+              link="/"
             />
           </div>
         </div>
