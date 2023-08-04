@@ -1,0 +1,80 @@
+// schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = "postgresql://TP20:TP20password@energy-saver.crgf7mtwiiwb.ap-southeast-2.rds.amazonaws.com:5432/CarbonEmission"// uses connection pooling
+}
+
+model Location {
+  postcode                                          String    @id
+  suburb                                            String
+  geo_shape                                         String
+  geo_point                                         String
+}
+
+model Emission {
+  id                                                Int       @default(autoincrement()) @id
+  source                                            String
+  scope_1_kg_co2e                                   Float
+  scope_2_kg_co2e                                   Float
+  scope_3_kg_co2e                                   Float
+  total_emission_kg_co2e                            Float
+  average_emissions_per_customer_kg_co2e            Float
+  average_emissions_per_customer_kg_co2e_per_day    Float
+  rest_of_municipality_emissions_kg_co2e            Float
+
+  // Adding the opposite relation field for Record
+  record                                            Record?  
+}
+
+model Cost {
+  id                                                Int         @id @default(autoincrement())
+  total_gas_gj                                      Float
+  average_intensity_gj_per_customer_per_annum       Float
+  average_intensity_mj_per_customer_per_day         Float
+  average_intensity_kwh_per_customer_per_annum      Float
+  average_intensity_kwh_per_customer_per_day        Float
+  average_intensity_household_per_day               Float
+  average_intensity_household_per_month             Float
+  average_intensity_household_per_annum             Float
+  total_cost                                        Float
+
+  // Adding the opposite relation field for Record
+  record                                            Record?  
+}
+
+model ElectricityUsage {
+  id                                                Int       @default(autoincrement()) @id      
+  toal_electricity_kwh                              Float
+  rest_of_municipality_total_electricity_kwh        Float
+
+  // Adding the opposite relation field for Record
+  record                                            Record?  
+}
+
+model GasUsage {
+  id                                                Int       @default(autoincrement()) @id
+  toal_gas_gj                                       Float      
+  rest_of_municipality_total_gas_gj                 Float      
+
+  // Adding the opposite relation field for Record
+  record                                            Record?
+}
+
+model Record {
+  year                                              String 
+  postcode                                          String
+  cost                                              Cost   @relation(fields: [costId], references: [id])
+  gas_usage                                         GasUsage @relation(fields: [gasUsageId], references: [id])
+  electricity_usage                                 ElectricityUsage @relation(fields: [electricityUsageId], references: [id])
+  emission                                          Emission @relation(fields: [emissionId], references: [id])
+  costId                                            Int @unique
+  gasUsageId                                        Int @unique
+  electricityUsageId                                Int @unique
+  emissionId                                        Int @unique
+  
+  @@id([year, postcode])
+}
