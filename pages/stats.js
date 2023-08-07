@@ -80,7 +80,7 @@ export default function Stats() {
             </div>
           </div>
         ) : (
-          <div className="h-[380px] w-[480px] flex flex-col items-center">
+          <div className="h-[460px] w-[560px] flex flex-col items-center bg-[#F7F9F7] p-[40px] rounded-xl">
             {/* input filed */}
             <div className="h-[260px] space-y-[60px]">
               <div>
