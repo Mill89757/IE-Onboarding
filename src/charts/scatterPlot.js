@@ -48,6 +48,21 @@ export default function ScatterPlot() {
             position: "left",
           },
         },
+        scales: {
+          y: {
+            beginAtZero: true, // Start y-axis at zero
+            title: {
+              display: true,
+              text: "Source Usage (kWh)/(MJ)",
+            },
+          },
+          x: {
+            title: {
+              display: true,
+              text: "Carbon Footprint (kgCO2e)",
+            },
+          },
+        },
         plugins: {
           legend: {
             display: false,
@@ -63,7 +78,7 @@ export default function ScatterPlot() {
 
   return (
     <div className="w-full h-full flex justify-center items-center">
-      <div style={{ width: "80%", height: "90%" }}>
+      <div style={{ width: "80%", height: "80%" }}>
         <canvas ref={chartRef}></canvas>
       </div>
     </div>

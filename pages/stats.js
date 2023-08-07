@@ -62,7 +62,7 @@ export default function Stats() {
             {/* action button */}
             <div className="w-full flex mt-[42px]">
               <Link
-                className="w-[290px] h-[72px] mr-auto flex items-center justify-center rounded-[25px] bg-[#C7DCC4]"
+                className="w-[160px] h-[50px] mr-auto flex items-center justify-center rounded-[25px] bg-[#C7DCC4]"
                 href="/compare"
               >
                 <h1 className="text-[#185E0E] text-xl font-semibold">
@@ -70,7 +70,7 @@ export default function Stats() {
                 </h1>
               </Link>
               <div
-                className="w-[290px] h-[72px] flex items-center justify-center rounded-[25px] bg-[#C7DCC4]"
+                className="w-[160px] h-[50px] flex items-center justify-center rounded-[25px] bg-[#C7DCC4]"
                 onClick={() => {
                   setIsCalculated(false);
                 }}
@@ -109,7 +109,7 @@ export default function Stats() {
             </div>
 
             <div
-              className="h-[72px] w-[300px] flex items-center justify-center bg-[#D0E9CD] rounded-[25px] mt-auto cursor-pointer"
+              className="h-[44px] w-[120px] flex items-center justify-center bg-[#D0E9CD] rounded-[25px] mt-auto cursor-pointer"
               onClick={() => {
                 const isValidElectricityBill =
                   isFloatWithTwoDecimalPlaces(electricityBill) &&
