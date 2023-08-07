@@ -114,7 +114,8 @@ export default function Stats() {
                   const calculatedCarbonFootprint =
                     parseFloat(electricityBill) * 0.85 +
                     parseFloat(gasBill) * 2.29;
-                  setCarbonFootprint(calculatedCarbonFootprint);
+                  const roundedCarbonFootprint = Math.round(calculatedCarbonFootprint); 
+                  setCarbonFootprint(roundedCarbonFootprint);
                   setIsCalculated(true);
                 } else {
                   setFlashMessage(
