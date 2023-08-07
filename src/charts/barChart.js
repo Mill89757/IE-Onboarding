@@ -1,7 +1,5 @@
 import { useEffect, useRef } from "react";
 import Chart from "chart.js/auto";
-import Header from "../src/components/Header";
-import BarChart from "../src/charts/barChart";
 
 function findClosestIndex(numbers, target) {
   let closestIndex = 0;
@@ -18,7 +16,7 @@ function findClosestIndex(numbers, target) {
   return closestIndex;
 }
 
-export default function Compare(props) {
+export default function BarChart() {
   const user_value = 4500;
 
   const dummy_data = [
@@ -69,6 +67,22 @@ export default function Compare(props) {
     },
     options: {
       responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true, // Start y-axis at zero
+          title: {
+            display: true,
+            text: "Carbon Footprint (kgCO2e)",
+          },
+        },
+        x: {
+          title: {
+            display: true,
+            text: "Post Code",
+          },
+        },
+      },
+
       plugins: {
         legend: {
           position: "top",
@@ -100,15 +114,9 @@ export default function Compare(props) {
   }, []);
 
   return (
-    <div>
-      <Header index={2} />
-      <div className="w-full h-[calc(100vh_-_80px)] flex items-center justify-center">
-        <div style={{ width: "80%", height: "80%" }}>
-          <h1 className="text-[#185E0E] text-2xl font-medium italic w-full text-center">
-            Where are you comparing with other’s carbon footprint?
-          </h1>
-          <BarChart />
-        </div>
+    <div className="w-full h-full flex items-center justify-center">
+      <div style={{ width: "80%", height: "80%" }}>
+        <canvas ref={chartRef}></canvas>
       </div>
     </div>
   );

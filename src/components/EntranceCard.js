@@ -14,7 +14,7 @@ export default function EntranceCard(props) {
         <h1 className="text-center text-lg font-semibold">{description}</h1>
         <Link
           className="w-[400px] h-[70px] rounded-[25px] flex justify-center items-center bg-[#C2DDBF] cursor-pointer italic"
-          href={link}
+          href={{ pathname: link, query: { data: title } }}
         >
           <h1 className="text-[#185E0E] font-semibold ">
             Click here to find out more
