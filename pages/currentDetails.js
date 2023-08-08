@@ -8,11 +8,16 @@ import { useRouter } from "next/router";
 import CheckTool from "../src/components/CheckTool";
 import Link from "next/link";
 
-export default function CurrentDetails(props) {
-  const data = [];
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
+
+export default function CurrentDetails({ records }) {
   const router = useRouter();
   const receivedData = router.query.data;
 
+  let data = [];
+  records.forEach((element) => {});
   return (
     <>
       <Header index={1} />
@@ -57,4 +62,42 @@ export default function CurrentDetails(props) {
       </div>
     </>
   );
+}
+
+export async function getServerSideProps() {
+  try {
+    const records = await prisma.record.findMany({
+      select: {
+        year: true,
+        gas_usage: {
+          select: {
+            toal_gas_gj: true,
+          },
+        },
+        electricity_usage: {
+          select: {
+            toal_electricity_kwh: true,
+          },
+        },
+        emission: {
+          select: {
+            scope_3_kg_co2e: true,
+          },
+        },
+      },
+    });
+
+    return {
+      props: {
+        records: records,
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching location data:", error);
+    return {
+      props: {
+        records: [],
+      },
+    };
+  }
 }
