@@ -3,6 +3,7 @@ import Chart from "chart.js/auto";
 import Header from "../src/components/Header";
 import BarChart from "../src/charts/barChart";
 import { PrismaClient } from "@prisma/client";
+import { useRouter } from "next/router";
 
 const prisma = new PrismaClient();
 
@@ -21,34 +22,16 @@ function findClosestIndex(numbers, target) {
   return closestIndex;
 }
 
-export default function Compare({ locations }) {
-  const user_value = 4500;
+export default function Compare({ records }) {
+  const router = useRouter();
+  const carbonFootprint = router.query.carbonFootprint;
 
-  const dummy_data = [
-    7982.33, 6419.33, 6399.17, 4588.17, 4513.83, 4015.67, 3907.5, 3833.17,
-    3558.33, 3499.33, 3442.17, 3223.67, 3039.67, 2975.83,
-  ];
-
-  const dummy_label = [
-    "3980",
-    "3156",
-    "3804",
-    "3807",
-    "3912",
-    "3806",
-    "3802",
-    "3805",
-    "3975",
-    "3977",
-    "3803",
-    "3177",
-    "3978",
-  ];
-
-  const [emissionData, setEmissionData] = useState([]);
-  const [postcodeLabels, setPostcodeLabels] = useState([]);
-
-  console.log(locations);
+  const scope_3_kg_co2e_data = [];
+  records.forEach((element) => {
+    scope_3_kg_co2e_data.push(element.emission.scope_3_kg_co2e);
+  });
+  // sort the total_emission_kg_co2e_data array in ascending order
+  scope_3_kg_co2e_data.sort((a, b) => a - b);
 
   return (
     <div>
@@ -58,7 +41,7 @@ export default function Compare({ locations }) {
           <h1 className="text-[#185E0E] text-2xl font-medium italic w-full text-center">
             Where are you comparing with other’s carbon footprint?
           </h1>
-          <BarChart />
+          <BarChart user_value={carbonFootprint} data={scope_3_kg_co2e_data} />
         </div>
       </div>
     </div>
@@ -67,18 +50,28 @@ export default function Compare({ locations }) {
 
 export async function getServerSideProps() {
   try {
-    const locations = await prisma.location.findMany();
+    const records = await prisma.record.findMany({
+      select: {
+        postcode: true,
+        year: true,
+        emission: {
+          select: {
+            scope_3_kg_co2e: true,
+          },
+        },
+      },
+    });
 
     return {
       props: {
-        locations: locations,
+        records: records,
       },
     };
   } catch (error) {
     console.error("Error fetching location data:", error);
     return {
       props: {
-        locations: [1],
+        records: [1],
       },
     };
   }

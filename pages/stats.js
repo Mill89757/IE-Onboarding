@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const static_result = [
   "Congratulations! you have a minimal impact on the environment in terms of carbon dioxide emissions.",
-  "Ooops, you are doing some damages to our environment"
+  "Ooops, you are doing some damages to our environment",
 ];
 
 function isFloatWithTwoDecimalPlaces(str) {
@@ -58,7 +58,10 @@ export default function Stats() {
             <div className="w-full flex mt-[42px]">
               <Link
                 className="w-[160px] h-[50px] mr-auto flex items-center justify-center rounded-[25px] bg-[#C7DCC4]"
-                href="/compare"
+                href={{
+                  pathname: "/compare",
+                  query: { carbonFootprint: carbonFootprint },
+                }}
               >
                 <h1 className="text-[#185E0E] text-xl font-semibold">
                   Compare
@@ -115,7 +118,9 @@ export default function Stats() {
                   const calculatedCarbonFootprint =
                     parseFloat(electricityBill) * 0.85 +
                     parseFloat(gasBill) * 2.29;
-                  const roundedCarbonFootprint = Math.round(calculatedCarbonFootprint); 
+                  const roundedCarbonFootprint = Math.round(
+                    calculatedCarbonFootprint
+                  );
                   setCarbonFootprint(roundedCarbonFootprint);
                   setIsCalculated(true);
                 } else {

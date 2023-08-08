@@ -16,47 +16,28 @@ function findClosestIndex(numbers, target) {
   return closestIndex;
 }
 
-export default function BarChart() {
-  const user_value = 4500;
-
-  const dummy_data = [
-    7982.33, 6419.33, 6399.17, 4588.17, 4513.83, 4015.67, 3907.5, 3833.17,
-    3558.33, 3499.33, 3442.17, 3223.67, 3039.67, 2975.83,
-  ];
-
-  const dummy_label = [
-    "3980",
-    "3156",
-    "3804",
-    "3807",
-    "3912",
-    "3806",
-    "3802",
-    "3805",
-    "3975",
-    "3977",
-    "3803",
-    "3177",
-    "3978",
-  ];
+export default function BarChart(props) {
+  const user_value = props.user_value;
+  const data = props.data;
 
   // Find the index of the user value in the dataset
-  const userIndex = findClosestIndex(dummy_data, user_value);
+  const userIndex = findClosestIndex(data, user_value);
 
   // Create an array to store background colors for each data point
-  const backgroundColors = dummy_data.map((value, index) =>
+  const backgroundColors = data.map((value, index) =>
     index === userIndex ? "rgba(255, 0, 0, 0.7)" : "rgba(24, 94, 14, 0.5)"
   );
+  const emptyStringList = Array.from({ length: 42 }, () => "");
 
   // Configuration for the bar chart
   const chartConfig = {
     type: "bar",
     data: {
-      labels: dummy_label,
+      labels: emptyStringList,
       datasets: [
         {
           label: "Carbon Footprint (kgCO2e)",
-          data: dummy_data,
+          data: data,
           borderColor: "#185E0E",
           backgroundColor: backgroundColors,
           borderWidth: 2,
@@ -78,7 +59,7 @@ export default function BarChart() {
         x: {
           title: {
             display: true,
-            text: "Post Code",
+            text: "Different Households in Victoria Over Year",
           },
         },
       },
@@ -115,9 +96,11 @@ export default function BarChart() {
 
   return (
     <div className="w-full h-full flex items-center justify-center">
-      <div style={{ width: "80%", height: "80%" }}>
-        <canvas ref={chartRef}></canvas>
-      </div>
+      {data && (
+        <div style={{ width: "80%", height: "80%" }}>
+          <canvas ref={chartRef}></canvas>
+        </div>
+      )}
     </div>
   );
 }
