@@ -1,7 +1,10 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import Chart from "chart.js/auto";
 import Header from "../src/components/Header";
 import BarChart from "../src/charts/barChart";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 function findClosestIndex(numbers, target) {
   let closestIndex = 0;
@@ -18,7 +21,7 @@ function findClosestIndex(numbers, target) {
   return closestIndex;
 }
 
-export default function Compare(props) {
+export default function Compare({ locations }) {
   const user_value = 4500;
 
   const dummy_data = [
@@ -42,62 +45,10 @@ export default function Compare(props) {
     "3978",
   ];
 
-  // Find the index of the user value in the dataset
-  const userIndex = findClosestIndex(dummy_data, user_value);
+  const [emissionData, setEmissionData] = useState([]);
+  const [postcodeLabels, setPostcodeLabels] = useState([]);
 
-  // Create an array to store background colors for each data point
-  const backgroundColors = dummy_data.map((value, index) =>
-    index === userIndex ? "rgba(255, 0, 0, 0.7)" : "rgba(24, 94, 14, 0.5)"
-  );
-
-  // Configuration for the bar chart
-  const chartConfig = {
-    type: "bar",
-    data: {
-      labels: dummy_label,
-      datasets: [
-        {
-          label: "Carbon Footprint (kgCO2e)",
-          data: dummy_data,
-          borderColor: "#185E0E",
-          backgroundColor: backgroundColors,
-          borderWidth: 2,
-          borderRadius: 5,
-          borderSkipped: false,
-        },
-      ],
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: {
-          position: "top",
-        },
-        title: {
-          display: true,
-          text: "Carbon Footprint Distribution from Victoria, Australia",
-        },
-      },
-    },
-  };
-
-  // Ref to store the chart instance
-  const chartRef = useRef(null);
-
-  useEffect(() => {
-    // Create the chart after the component mounts
-    if (chartRef.current) {
-      const ctx = chartRef.current.getContext("2d");
-      chartRef.current.chart = new Chart(ctx, chartConfig);
-    }
-
-    // Clean up chart instance when component unmounts
-    return () => {
-      if (chartRef.current) {
-        chartRef.current.chart.destroy();
-      }
-    };
-  }, []);
+  console.log(locations);
 
   return (
     <div>
@@ -112,4 +63,23 @@ export default function Compare(props) {
       </div>
     </div>
   );
+}
+
+export async function getServerSideProps() {
+  try {
+    const locations = await prisma.location.findMany();
+
+    return {
+      props: {
+        locations: locations,
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching location data:", error);
+    return {
+      props: {
+        locations: [1],
+      },
+    };
+  }
 }
