@@ -27,7 +27,7 @@ export default function CurrentDetails({ records }) {
             >
               <div className="">
                 <label className="text-gray-600 font-medium mr-2">
-                  Emission Source:
+                  Energy Type:
                 </label>
                 <select
                   // value={dataSource}
@@ -40,7 +40,7 @@ export default function CurrentDetails({ records }) {
               </div>
             </div>
             <div className="h-[400px]">
-              {receivedData === "Average Electricity Usage" ? (
+              {receivedData === "Average Energy Usage" ? (
                 <BoxPlot data_index={dataSourceIndex} />
               ) : (
                 <ScatterPlot data_index={dataSourceIndex} />

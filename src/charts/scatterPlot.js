@@ -52,7 +52,6 @@ function processData(data) {
   const processed_data = [];
   for (let i = 0; i < data[0].length; i++) {
     processed_data.push({ x: data[0][i], y: data[1][i] });
-    console.log(processed_data[i]);
   }
   return processed_data;
 }
@@ -81,7 +80,7 @@ export default function ScatterPlot(props) {
       data: {
         datasets: [
           {
-            label: "Scatter Plot",
+            label: "Carbon Footprint vs. Source Usage",
             backgroundColor: "rgba(255, 99, 132, 0.7)",
             borderColor: "rgba(255, 99, 132, 1)",
             data: passed_data,
@@ -124,7 +123,7 @@ export default function ScatterPlot(props) {
           },
           title: {
             display: true,
-            text: "Chart.js Scatter Plot",
+            text: "The relationship between carbon footprint and source usage",
           },
         },
       },

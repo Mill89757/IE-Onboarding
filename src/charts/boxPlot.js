@@ -53,7 +53,7 @@ export default function BoxPlot(props) {
         labels: ["2020", "2021", "2022"],
         datasets: [
           {
-            label: "Box Plot",
+            label: "Energy Usage",
             backgroundColor: "rgba(255, 99, 132, 0.2)",
             borderColor: "rgba(255, 99, 132, 1)",
             borderWidth: 2,
@@ -67,9 +67,29 @@ export default function BoxPlot(props) {
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true, // Start y-axis at zero
+            title: {
+              display: true,
+              text: "Source Usage (kWh)/(MJ)",
+            },
+          },
+          x: {
+            title: {
+              display: true,
+              text: "Year",
+            },
+          },
+        },
         plugins: {
           legend: {
             display: false,
+          },
+          title: {
+            display: true,
+            display: true,
+            text: "The energy usage of the past 3 years",
           },
         },
       },
