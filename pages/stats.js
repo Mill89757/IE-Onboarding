@@ -45,6 +45,7 @@ export default function Stats() {
             <div className="mt-[24px] w-[610px] h-[146px] flex items-center justify-center bg-[#F7F9F7] rounded-[15px]">
               <h1 className="text-[#185E0E] text-8xl font-bold italic">
                 {carbonFootprint}
+                <span className="ml-2 text-sm">(kgCO2e)</span>
               </h1>
             </div>
             <h1 className="text-[#185E0E] text-4xl font-medium italic pt-[42px] w-full">
@@ -88,6 +89,7 @@ export default function Stats() {
               </div>
               <div className="flex h-[40px]">
                 <h1 className="text-2xl text-[#185E0E]">Electricity Usage</h1>
+                <span className="ml-2 text-sm">(kW/h)</span>
                 <input
                   className="ml-auto h-[40px] bg-[#D1E1CE] p-[6px] rounded-[4px]"
                   onChange={(e) => {
@@ -97,6 +99,7 @@ export default function Stats() {
               </div>
               <div className="flex h-[40px]">
                 <h1 className="text-2xl text-[#185E0E]">Gas Usage</h1>
+                <span className="ml-2 text-sm">(kW/h)</span>
                 <input
                   className="ml-auto h-[40px] bg-[#D1E1CE] p-[6px] rounded-[4px]"
                   onChange={(e) => {
