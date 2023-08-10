@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import FootprintImage from "pictures/carbon-footprint.png"
+import EnergyImage from "pictures/sustainability.png"
 
 export default function InfoCard(props) {
     const title = props.title;
@@ -15,7 +15,7 @@ export default function InfoCard(props) {
         {/* Secondary Content - Image */}
         <div className="flex justify-center items-center mb-4">
             <Image
-                src={FootprintImage}
+                src={EnergyImage}
                 width={100}
                 height={100}
                 alt="Picture of energy"
