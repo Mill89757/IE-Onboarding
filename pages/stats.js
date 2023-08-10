@@ -88,20 +88,22 @@ export default function Stats() {
                 </h1>
               </div>
               <div className="flex h-[40px]">
-                <h1 className="text-2xl text-[#185E0E]">Electricity Usage</h1>
+                <h1 className="text-2xl text-[#185E0E]">
+                  Electricity Yearly Usage
+                </h1>
                 <span className="ml-2 text-sm">(kW/h)</span>
                 <input
-                  className="ml-auto h-[40px] bg-[#D1E1CE] p-[6px] rounded-[4px]"
+                  className="ml-auto h-[40px] bg-[#D1E1CE] p-[6px] rounded-[4px] w-[140px]"
                   onChange={(e) => {
                     setElectricityBill(e.target.value);
                   }}
                 />
               </div>
               <div className="flex h-[40px]">
-                <h1 className="text-2xl text-[#185E0E]">Gas Usage</h1>
+                <h1 className="text-2xl text-[#185E0E]">Gas Yearly Usage</h1>
                 <span className="ml-2 text-sm">(kW/h)</span>
                 <input
-                  className="ml-auto h-[40px] bg-[#D1E1CE] p-[6px] rounded-[4px]"
+                  className="ml-auto h-[40px] bg-[#D1E1CE] p-[6px] rounded-[4px] w-[140px]"
                   onChange={(e) => {
                     setGasBill(e.target.value);
                   }}

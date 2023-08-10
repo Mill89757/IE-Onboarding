@@ -8,8 +8,8 @@ export default function Current() {
       <div className="h-[calc(100vh_-_80px)]">
         <div className="flex items-center justify-center gap-x-[86px] h-full">
           <EntranceCard
-            title="Average Electricity Usage"
-            description="What is the average electricity bill?"
+            title="Average Energy Usage"
+            description="What is the average energy usage?"
             link="/currentDetails"
           />
           <EntranceCard
