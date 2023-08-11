@@ -84,12 +84,12 @@ export default function Stats() {
             <div className="h-[260px] space-y-[60px]">
               <div>
                 <h1 className="text-[#185E0E] text-9xl font-bold sm:text-4xl italic h-[50px] text-center">
-                  Carbon Footprint Calculator
+                  Annual Carbon Footprint Calculator
                 </h1>
               </div>
               <div className="flex h-[40px]">
                 <h1 className="text-2xl text-[#185E0E]">
-                  Electricity Yearly Usage
+                  Electricity Usage
                 </h1>
                 <span className="ml-2 text-sm">(kW/h)</span>
                 <input
@@ -100,8 +100,8 @@ export default function Stats() {
                 />
               </div>
               <div className="flex h-[40px]">
-                <h1 className="text-2xl text-[#185E0E]">Gas Yearly Usage</h1>
-                <span className="ml-2 text-sm">(kW/h)</span>
+                <h1 className="text-2xl text-[#185E0E]">Gas Usage</h1>
+                <span className="ml-2 text-sm">(GJ)</span>
                 <input
                   className="ml-auto h-[40px] bg-[#D1E1CE] p-[6px] rounded-[4px] w-[140px]"
                   onChange={(e) => {
