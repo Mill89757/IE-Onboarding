@@ -91,7 +91,7 @@ export default function Stats() {
                 <h1 className="text-2xl text-[#185E0E]">
                   Electricity Usage
                 </h1>
-                <span className="ml-2 text-sm">(kW/h)</span>
+                <span className="ml-2 text-sm">(kW)</span>
                 <input
                   className="ml-auto h-[40px] bg-[#D1E1CE] p-[6px] rounded-[4px] w-[140px]"
                   onChange={(e) => {
